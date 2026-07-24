@@ -1,7 +1,5 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
   try {
     const { name, whatsapp, email, message } = await request.json();
@@ -12,6 +10,16 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
+
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      return Response.json(
+        { error: "Formulir kontak belum diaktifkan. Silakan hubungi kami melalui WhatsApp." },
+        { status: 503 },
+      );
+    }
+
+    const resend = new Resend(apiKey);
 
     const { error } = await resend.emails.send({
       // Ganti setelah domain Anda terverifikasi di Resend
