@@ -1,0 +1,11 @@
+# Dependencies and generated files
+node_modules/
+.next/
+
+# Local environment variables (may contain passwords and API keys)
+.env
+.env.local
+.env.*.local
+
+# Vercel build output
+.vercel/

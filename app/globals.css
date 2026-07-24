@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base { * { @apply border-stone-200; } html { scroll-behavior: smooth; } body { @apply bg-[#FAFAFA] text-[#222] antialiased; } }
+@layer components { .shell { @apply mx-auto w-full max-w-7xl px-5 sm:px-8; } .eyebrow { @apply mb-3 text-xs font-semibold uppercase tracking-[.2em] text-forest; } .button { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5; } .button-primary { @apply button bg-forest text-white shadow-lg shadow-green-900/15 hover:bg-green-800; } .button-secondary { @apply button border border-stone-300 bg-white text-ink hover:border-forest; } }

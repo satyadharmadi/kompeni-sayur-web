@@ -1,0 +1,14 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+model User { id String @id @default(cuid()) email String @unique name String? role String @default("CUSTOMER") orders Order[] wishlist Wishlist[] createdAt DateTime @default(now()) }
+model Category { id String @id @default(cuid()) name String slug String @unique products Product[] }
+model Product { id String @id @default(cuid()) name String slug String @unique description String price Int stock Int @default(0) images String[] categoryId String category Category @relation(fields:[categoryId],references:[id]) items OrderItem[] reviews Review[] inventory Inventory? createdAt DateTime @default(now()) }
+model Order { id String @id @default(cuid()) userId String? user User? @relation(fields:[userId],references:[id]) status String @default("PENDING") total Int items OrderItem[] createdAt DateTime @default(now()) }
+model OrderItem { id String @id @default(cuid()) orderId String order Order @relation(fields:[orderId],references:[id]) productId String product Product @relation(fields:[productId],references:[id]) quantity Int price Int }
+model Review { id String @id @default(cuid()) productId String product Product @relation(fields:[productId],references:[id]) rating Int comment String? author String createdAt DateTime @default(now()) }
+model Wishlist { id String @id @default(cuid()) userId String user User @relation(fields:[userId],references:[id]) productId String @@unique([userId,productId]) }
+model Blog { id String @id @default(cuid()) title String slug String @unique excerpt String content String publishedAt DateTime? createdAt DateTime @default(now()) }
+model Coupon { id String @id @default(cuid()) code String @unique type String value Int active Boolean @default(true) expiresAt DateTime? }
+model Newsletter { id String @id @default(cuid()) email String @unique createdAt DateTime @default(now()) }
+model Customer { id String @id @default(cuid()) name String email String @unique phone String? address String? createdAt DateTime @default(now()) }
+model Inventory { id String @id @default(cuid()) productId String @unique product Product @relation(fields:[productId],references:[id]) quantity Int @default(0) reorderAt Int @default(5) updatedAt DateTime @updatedAt }

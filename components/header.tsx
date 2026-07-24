@@ -1,0 +1,7 @@
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, Search, ShoppingBag } from "lucide-react";
+import { LanguageSwitcher } from "./language-switcher";
+import { useText } from "./language-provider";
+export function Header() { const t=useText(); const links = [[t("Beranda","Home"), "/"], [t("Produk","Products"), "/products"], [t("Tentang Kami","About"), "/about"], ["Blog", "/blog"], [t("Kontak","Contact"), "/contact"]]; return <header className="sticky top-0 z-50 border-b border-stone-200/70 bg-[#FAFAFA]/90 backdrop-blur"><div className="shell flex h-[72px] items-center justify-between"><Link href="/" aria-label="Kompeni Sayur, home" className="relative block h-11 w-40 overflow-hidden"><Image src="/images/brand/kompeni-sayur-logo.png" alt="Kompeni Sayur" fill priority className="object-cover" sizes="160px"/></Link><nav className="hidden items-center gap-7 md:flex">{links.map(([label, href]) => <Link className="text-sm font-medium text-stone-600 hover:text-forest" href={href} key={href}>{label}</Link>)}</nav><div className="flex items-center gap-3"><LanguageSwitcher/><button aria-label={t("Cari","Search")} className="hidden sm:block"><Search size={19}/></button><Link href="/products" aria-label={t("Keranjang","Cart")} className="grid h-9 w-9 place-items-center rounded-full bg-white shadow-sm"><ShoppingBag size={18}/></Link><button aria-label="Menu" className="md:hidden"><Menu /></button></div></div></header> }

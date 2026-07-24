@@ -1,0 +1,17 @@
+export const products = [
+  { name: "Bayam Hijau", nameEn: "Green Spinach", stock: null, price: "Rp10.000", image: "/images/products/Bayam Hijau.jpeg", tag: "Panen segar", tagEn: "Fresh harvest", description: "Bayam hijau segar untuk menu sehat sehari-hari.", descriptionEn: "Fresh green spinach for everyday healthy meals." },
+  { name: "Bayam Merah", nameEn: "Red Spinach", stock: null, price: "Rp12.000", image: "/images/products/Bayam Merah.jpeg", tag: "Pilihan sehat", tagEn: "Healthy choice", description: "Bayam merah dengan warna alami yang cantik.", descriptionEn: "Red spinach with naturally beautiful colour." },
+  { name: "Kangkung", nameEn: "Water Spinach", stock: 5, price: "Rp10.000", image: "/images/products/Kangkung.jpeg", tag: "Favorit keluarga", tagEn: "Family favourite", description: "Kangkung segar dengan daun lembut dan batang renyah.", descriptionEn: "Fresh water spinach with tender leaves and crisp stems." },
+  { name: "Caisim", nameEn: "Choy Sum", stock: null, price: "Rp10.000", image: "/images/products/Caisim.jpeg", tag: "Panen segar", tagEn: "Fresh harvest", description: "Caisim renyah, cocok untuk tumis maupun mi.", descriptionEn: "Crisp choy sum, ideal for stir-fries and noodles." },
+  { name: "Pakcoy", nameEn: "Bok Choy", stock: 3, price: "Rp10.000", image: "/images/products/pakcoy.jpeg", tag: "Panen hari ini", tagEn: "Harvested today", description: "Pakcoy manis dan segar untuk tumis atau sup.", descriptionEn: "Sweet, fresh bok choy for stir-fries or soup." },
+  { name: "Sawi Pagoda", nameEn: "Tatsoi", stock: null, price: "Rp12.000", image: "/images/products/Sawi Pagoda.jpeg", tag: "Premium", tagEn: "Premium", description: "Sawi pagoda berdaun padat dengan rasa yang lembut.", descriptionEn: "Dense-leaf tatsoi with a delicate flavour." },
+  { name: "Kailan", nameEn: "Chinese Kale", stock: null, price: "Rp12.000", image: "/images/products/kailan.jpeg", tag: "Pilihan chef", tagEn: "Chef's choice", description: "Kailan muda bertekstur segar untuk dapur profesional.", descriptionEn: "Young Chinese kale, fresh in texture for professional kitchens." },
+  { name: "Kale", nameEn: "Kale", stock: null, price: "Rp18.000", image: "/images/products/kale.jpeg", tag: "Superfood", tagEn: "Superfood", description: "Daun kale kaya nutrisi untuk menu harian.", descriptionEn: "Nutrient-rich kale for daily meals." },
+  { name: "Selada Keriting", nameEn: "Curly Lettuce", stock: null, price: "Rp14.000", image: "/images/products/Selada Keriting.jpeg", tag: "Best seller", tagEn: "Best seller", description: "Selada keriting renyah untuk salad dan sandwich.", descriptionEn: "Crisp curly lettuce for salads and sandwiches." },
+  { name: "Selada Romaine", nameEn: "Romaine Lettuce", stock: null, price: "Rp14.000", image: "/images/products/Selada Romaine.jpeg", tag: "Best seller", tagEn: "Best seller", description: "Selada romaine renyah, dipanen saat pesanan masuk.", descriptionEn: "Crisp romaine lettuce, harvested to order." }
+];
+export const faqs = [
+  ["Apa bedanya sayur hidroponik?", "Tumbuh di lingkungan terkontrol tanpa tanah, sehingga lebih bersih, konsisten, dan dipanen dalam kondisi sangat segar."],
+  ["Apakah bisa kirim untuk kebutuhan usaha?", "Bisa. Kami melayani kebutuhan rutin restoran, kafe, hotel, reseller, serta pesanan keluarga."],
+  ["Bagaimana cara menyimpan sayur?", "Simpan dalam chiller 2–5°C dan jangan dicuci sebelum digunakan agar kesegarannya terjaga lebih lama."]
+];
