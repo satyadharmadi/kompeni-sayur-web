@@ -1,5 +1,5 @@
 /**
- * Fetch stock data from Google Sheet CSV export
+ * Fetch stock data from Google Sheet Apps Script endpoint
  */
 export async function fetchStockFromGoogleSheet() {
   try {
@@ -20,21 +20,27 @@ export async function fetchStockFromGoogleSheet() {
     }
 
     const csvText = await response.text();
+    console.log("Raw CSV:", csvText); // Debug log
 
-    // Parse CSV
-    const lines = csvText.trim().split("\n");
+    // Parse CSV - handle both \n and \r\n line endings
+    const lines = csvText.split(/\r?\n/).filter(line => line.trim());
+    
     if (lines.length < 2) {
-      console.error("CSV format invalid or empty");
+      console.error("CSV format invalid or empty. Lines:", lines);
       return null;
     }
 
     const headers = lines[0].split(",").map((h) => h.trim());
+    console.log("Headers:", headers); // Debug log
+
     const nameIndex = headers.findIndex(
       (h) => h.toLowerCase() === "name"
     );
     const stockIndex = headers.findIndex(
       (h) => h.toLowerCase() === "stock"
     );
+
+    console.log("nameIndex:", nameIndex, "stockIndex:", stockIndex); // Debug log
 
     if (nameIndex === -1 || stockIndex === -1) {
       console.error("CSV missing 'Name' or 'Stock' columns");
@@ -51,14 +57,18 @@ export async function fetchStockFromGoogleSheet() {
       const name = cells[nameIndex];
       const stockStr = cells[stockIndex];
 
+      console.log(`Row ${i}: name="${name}", stock="${stockStr}"`); // Debug log
+
       if (name && stockStr) {
         const stock = parseInt(stockStr, 10);
         if (!isNaN(stock)) {
           stockMap[name] = stock;
+          console.log(`Added to stockMap: ${name} = ${stock}`); // Debug log
         }
       }
     }
 
+    console.log("Final stockMap:", stockMap); // Debug log
     return stockMap;
   } catch (error) {
     console.error("Error fetching Google Sheet:", error);
