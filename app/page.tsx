@@ -9,10 +9,12 @@ import { Footer } from "@/components/footer";
 import { ProductCard } from "@/components/product-card";
 import { faqs, products } from "@/lib/data";
 import { useText } from "@/components/language-provider";
+import { fetchStockFromGoogleSheet } from "@/lib/google-sheet";
 
 export default function Home() {
   const t = useText();
   const [today, setToday] = useState("");
+  const [stockData, setStockData] = useState<Record<string, number> | null>(null);
 
   useEffect(() => {
     const updateDate = () =>
@@ -30,6 +32,29 @@ export default function Home() {
     const timer = window.setInterval(updateDate, 60_000);
     return () => window.clearInterval(timer);
   }, []);
+
+  // Fetch stock from Google Sheet
+  useEffect(() => {
+    const loadStockData = async () => {
+      const data = await fetchStockFromGoogleSheet();
+      if (data) {
+        setStockData(data);
+      }
+    };
+
+    loadStockData();
+    // Refresh stock every 5 minutes for real-time updates
+    const stockTimer = window.setInterval(loadStockData, 5 * 60 * 1000);
+    return () => window.clearInterval(stockTimer);
+  }, []);
+
+  // Get stock for a product, prioritizing Google Sheet data over hardcoded data
+  const getStock = (productName: string) => {
+    if (stockData && stockData[productName]) {
+      return stockData[productName];
+    }
+    return products.find((p) => p.name === productName)?.stock || null;
+  };
 
   return (
     <>
@@ -127,20 +152,26 @@ export default function Home() {
 
             <div className="mt-6 max-w-xl divide-y divide-green-100 rounded-2xl bg-white px-5">
               {products
-                .filter((product) => product.stock !== null)
-                .map((product) => (
-                  <div
-                    className="flex items-center justify-between py-4"
-                    key={product.name}
-                  >
-                    <span className="font-medium text-stone-800">
-                      {t(product.name, product.nameEn)}
-                    </span>
-                    <b className="text-forest">
-                      {product.stock} {t("pack", "packs")}
-                    </b>
-                  </div>
-                ))}
+                .filter((product) => {
+                  const stock = getStock(product.name);
+                  return stock !== null && stock > 0;
+                })
+                .map((product) => {
+                  const stock = getStock(product.name);
+                  return (
+                    <div
+                      className="flex items-center justify-between py-4"
+                      key={product.name}
+                    >
+                      <span className="font-medium text-stone-800">
+                        {t(product.name, product.nameEn)}
+                      </span>
+                      <b className="text-forest">
+                        {stock} {t("pack", "packs")}
+                      </b>
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </section>
