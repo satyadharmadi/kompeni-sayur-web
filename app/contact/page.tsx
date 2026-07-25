@@ -52,7 +52,12 @@ export default function Contact() {
             <p>
               <b>Lokasi</b>
               <br />
-              Tangerang, Indonesia
+              <a
+                className="hover:text-forest"
+                href="https://maps.app.goo.gl/EDiFe4LCsNq488mi9"
+              >
+                Tangerang, Indonesia
+              </a>
             </p>
           </div>
         </div>
